@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Shaira 🌻❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Georgia", serif;
+            background: #fff8dc;
+            color: #4d3500;
+            overflow-x: hidden;
+        }
+
+        /* PANTALLA DE INICIO */
+        #inicio {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #fff7a8, #ffd84d, #e9a900);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease;
+        }
+
+        .inicio-contenido {
+            padding: 30px;
+        }
+
+        .flor-inicio {
+            font-size: 110px;
+            animation: balanceo 2s infinite ease-in-out;
+        }
+
+        .inicio-contenido h1 {
+            font-size: 48px;
+            color: #684700;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+        }
+
+        .inicio-contenido p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            color: #725300;
+        }
+
+        .boton-abrir,
+        .boton-final {
+            border: none;
+            padding: 17px 35px;
+            border-radius: 40px;
+            background: white;
+            color: #a66c00;
+            font-size: 19px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(100,70,0,.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .boton-abrir:hover,
+        .boton-final:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(100,70,0,.35);
+        }
+
+        @keyframes balanceo {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-15px); }
+        }
+
+        /* CONTENIDO */
+        #contenido {
+            display: none;
+        }
+
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(233,169,0,0.85), rgba(114,83,0,0.85));
+            color: white;
+        }
+
+        .hero-contenido {
+            max-width: 850px;
+            padding: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            text-shadow: 0 5px 15px rgba(0,0,0,.3);
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin: 20px 0;
+            font-weight: normal;
+        }
+
+        .hero p {
+            font-size: 22px;
+            line-height: 1.7;
+        }
+
+        .fecha {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: rgba(255,255,255,.25);
+            border: 1px solid rgba(255,255,255,.7);
+            backdrop-filter: blur(5px);
+        }
+
+        /* TITULOS */
+        .seccion-titulo {
+            text-align: center;
+            font-size: 40px;
+            color: #bd7c00;
+            margin-bottom: 45px;
+        }
+
+        /* CARTA */
+        .carta-contenedor {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .carta {
+            background: linear-gradient(#fff8d2, #ffeeb0);
+            padding: 55px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(95,65,0,.2);
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        .carta:before, .carta:after {
+            content: "🌻";
+            position: absolute;
+            font-size: 45px;
+        }
+
+        .carta:before { top: 15px; left: 20px; }
+        .carta:after { bottom: 15px; right: 20px; }
+
+        .carta h3 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #8b5b00;
+        }
+
+        .carta p {
+            font-size: 19px;
+            line-height: 1.9;
+            margin-bottom: 17px;
+        }
+
+        .firma {
+            text-align: right;
+            font-size: 25px;
+            margin-top: 30px;
+            color: #a86d00;
+            font-weight: bold;
+        }
+
+        /* FOTOS */
+        #fotos {
+            background: #fffdf0;
+        }
+
+        .galeria {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .foto {
+            background: white;
+            padding: 15px 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(80,55,0,.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform: rotate(-1.5deg);
+        }
+
+        .foto:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
+
+        .foto:hover {
+            transform: rotate(0deg) scale(1.04);
+            box-shadow: 0 15px 35px rgba(80,55,0,.25);
+            z-index: 5;
+        }
+
+        .foto img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .foto p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #684700;
+            font-weight: 500;
+        }
+
+        /* MUSICA */
+        #musica {
+            text-align: center;
+            background: linear-gradient(135deg, #ffe985, #fff6bd);
+        }
+
+        .reproductor {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255,255,255,.9);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 12px 30px rgba(110,75,0,.15);
+        }
+
+        .disco {
+            width: 140px;
+            height: 140px;
+            margin: auto auto 25px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffe36b 0 12%, #8f6200 13% 18%, #222 19% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            animation: girar 6s linear infinite;
+            animation-play-state: paused;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .reproductor.reproduciendo .disco {
+            animation-play-state: running;
+        }
+
+        @keyframes girar {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .reproductor h3 {
+            font-size: 28px;
+            color: #805400;
+        }
+
+        .reproductor p {
+            margin: 10px 0 20px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        /* FINAL */
+        .final {
+            min-height: 80vh;
+            background: #fff5bd;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .final h2 {
+            font-size: 44px;
+            color: #9d6800;
+            margin-bottom: 25px;
+        }
+
+        .final p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 21px;
+            line-height: 1.8;
+        }
+
+        .boton-final {
+            margin-top: 35px;
+            background: #eeb300;
+            color: white;
+        }
+
+        /* JARDIN */
+        .jardin {
+            height: 350px;
+            position: relative;
+            margin-top: 40px;
+            overflow: hidden;
+        }
+
+        .suelo {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 70px;
+            background: #78952b;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .flor-creciendo {
+            position: absolute;
+            bottom: 45px;
+            font-size: 60px;
+            transform: scale(0);
+            transform-origin: bottom;
+            animation: crecer 2s forwards;
+        }
+
+        @keyframes crecer {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* CORAZONES Y PETALOS */
+        .corazon, .petalo {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .corazon {
+            bottom: -40px;
+            font-size: 25px;
+            z-index: 20;
+            animation: subir linear forwards;
+        }
+
+        .petalo {
+            top: -40px;
+            font-size: 25px;
+            z-index: 15;
+            animation: caer linear forwards;
+        }
+
+        @keyframes subir {
+            0% { transform: translateY(0) scale(.5); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-110vh) scale(1.5) rotate(20deg); opacity: 0; }
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        footer {
+            background: #6b4700;
+            color: #fff6bd;
+            text-align: center;
+            padding: 30px;
+            font-size: 17px;
+        }
+
+        @media(max-width:650px) {
+            .inicio-contenido h1 { font-size: 35px; }
+            .hero h2 { font-size: 24px; }
+            .hero p { font-size: 17px; }
+            .seccion-titulo { font-size: 32px; }
+            .carta { padding: 35px 20px; }
+            .carta p { font-size: 17px; }
+            .galeria { grid-template-columns: 1fr; }
+            .foto img { height: 320px; }
+            .final h2 { font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PANTALLA INICIAL -->
+<div id="inicio">
+    <div class="inicio-contenido">
+        <div class="flor-inicio">🌻</div>
+        <h1>Shaira, tengo algo para ti...</h1>
+        <p>Una pequeña sorpresa para la persona que hace mis días más bonitos. ❤️</p>
+        <button class="boton-abrir" onclick="abrirSorpresa()">💌 Abrir mi sorpresa</button>
+    </div>
+</div>
+
+<!-- CONTENIDO -->
+<div id="contenido">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-contenido">
+            <h1>Para mi niña hermosa 🌻</h1>
+            <h2>21 de Septiembre<br>Día de las Flores Amarillas</h2>
+            <p>Hoy no quiero regalarte solamente flores...<br><br>Quiero regalarte un pedacito de todo lo que siento por ti. 💛</p>
+            <div class="fecha">Shaira, tú haces mis días más bonitos ❤️</div>
+        </div>
+    </section>
+
+    <!-- CARTA -->
+    <section id="carta">
+        <h2 class="seccion-titulo">💌 Una carta para Shaira</h2>
+        <div class="carta-contenedor">
+            <div class="carta">
+                <h3>Mi Shaira, 🌻</h3>
+                <p>Desde que llegaste a mi vida, muchas cosas se sienten diferentes. Los días parecen más bonitos y hasta los pequeños momentos tienen un significado especial.</p>
+                <p>Hoy, en este 21 de septiembre, quería encontrar una forma diferente de decirte lo importante que eres para mí.</p>
+                <p>Estas flores amarillas representan alegría, cariño y todos esos momentos que quiero seguir compartiendo contigo.</p>
+                <p>Shaira, gracias por cada sonrisa, cada conversación, cada momento y simplemente por ser tú.</p>
+                <p>Me encanta poder compartir momentos contigo y espero que podamos seguir creando muchos recuerdos juntos.</p>
+                <p>No sé qué nos espera mañana, pero sí sé que quiero seguir disfrutando cada momento a tu lado.</p>
+                <p>Espero que cuando veas estas flores recuerdes que hay alguien que piensa en ti, que te quiere muchísimo y que desea verte siempre feliz. 💛</p>
+                <p>Feliz Día de las Flores Amarillas, mi Shaira. 🌻❤️</p>
+                <div class="firma">Con todo mi cariño,<br>para ti, amor ❤️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOTOS -->
+    <section id="fotos">
+        <h2 class="seccion-titulo">📸 Nuestros momentos</h2>
+        <div class="galeria">
+            <div class="foto">
+                <img src="./flaca.jpeg" alt="Shaira y yo con flores">
+                <p>Un momento especial juntos ❤️</p>
+            </div>
+            <div class="foto">
+                <img src="./flaca1.jpeg" alt="Sonriendo juntos">
+                <p>Contigo todo es más bonito 🌻</p>
+            </div>
+            <div class="foto">
+                <img src="./mol.jpeg" alt="Nuestra hermosa sonrisa">
+                <p>Una sonrisa que me encanta 💛</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUSICA -->
+    <section id="musica">
+        <h2 class="seccion-titulo">🎵 Una canción para Shaira</h2>
+        <div class="reproductor" id="reproductor">
+            <div class="disco">🌻</div>
+            <h3>Nuestra canción ❤️</h3>
+            <p>Una canción para acompañar este pequeño detalle que hice especialmente para ti.</p>
+            <audio id="audio" controls onplay="musicaIniciada()" onpause="musicaPausada()">
+                <source src="Sebastian Yatra - Cristina (Letra).mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+            </audio>
+        </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="final">
+        <h2>Shaira, esto es solo el comienzo... 🌻</h2>
+        <p>
+            Quiero que estas flores sean solamente el comienzo de muchos momentos bonitos.
+            <br><br>
+            Que nunca nos falten razones para sonreír, abrazarnos, compartir y crear nuevos recuerdos.
+            <br><br>
+            Gracias por existir, Shaira, y por hacer mi mundo un poquito más especial.
+            <br><br>
+            ❤️ Te quiero muchísimo ❤️
+        </p>
+
+        <button class="boton-final" onclick="crearJardin()">🌻 Ver nuestro jardín 🌻</button>
+
+        <div class="jardin" id="jardin">
+            <div class="suelo"></div>
+        </div>
+    </section>
+
+    <footer>
+        Hecho especialmente para mi niña 🌻💛
+        <br><br>
+        21 de Septiembre ❤️
+    </footer>
+</div>
+
+<script>
+    function abrirSorpresa() {
+        const inicio = document.getElementById("inicio");
+        const contenido = document.getElementById("contenido");
+        const audio = document.getElementById("audio");
+
+        inicio.style.opacity = "0";
+
+        setTimeout(() => {
+            inicio.style.display = "none";
+            contenido.style.display = "block";
+            lanzarCorazones();
+            lanzarPetalos();
+            audio.play().catch(() => {});
+        }, 1500);
+    }
+
+    function crearCorazon() {
+        const corazon = document.createElement("div");
+        corazon.className = "corazon";
+        const corazones = ["❤️", "💛", "💕", "💖", "💗"];
+        corazon.innerHTML = corazones[Math.floor(Math.random() * corazones.length)];
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.animationDuration = (Math.random() * 4 + 4) + "s";
+        corazon.style.fontSize = (Math.random() * 20 + 18) + "px";
+        document.body.appendChild(corazon);
+
+        setTimeout(() => { corazon.remove(); }, 8000);
+    }
+
+    function lanzarCorazones() {
+        setInterval(crearCorazon, 1000);
+    }
+
+    function crearPetalo() {
+        const petalo = document.createElement("div");
+        petalo.className = "petalo";
+        petalo.innerHTML = "🌼";
+        petalo.style.left = Math.random() * 100 + "vw";
+        petalo.style.animationDuration = (Math.random() * 5 + 4) + "s";
+        petalo.style.fontSize = (Math.random() * 15 + 15) + "px";
+        document.body.appendChild(petalo);
+
+        setTimeout(() => { petalo.remove(); }, 9000);
+    }
+
+    function lanzarPetalos() {
+        setInterval(crearPetalo, 700);
+    }
+
+    function musicaIniciada() {
+        document.getElementById("reproductor").classList.add("reproduciendo");
+    }
+
+    function musicaPausada() {
+        document.getElementById("reproductor").classList.remove("reproduciendo");
+    }
+
+    function crearJardin() {
+        const jardin = document.getElementById("jardin");
+        if (jardin.dataset.creado === "true") return;
+        jardin.dataset.creado = "true";
+
+        for (let i = 0; i < 20; i++) {
+            const flor = document.createElement("div");
+            flor.className = "flor-creciendo";
+            flor.innerHTML = "🌻";
+            flor.style.left = (Math.random() * 90) + "%";
+            flor.style.fontSize = (Math.random() * 30 + 40) + "px";
+            flor.style.animationDelay = (Math.random() * 1.5) + "s";
+            jardin.appendChild(flor);
+        }
+
+        for (let i = 0; i < 15; i++) {
+            setTimeout(crearCorazon, i * 120);
+        }
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    }
+</script>
+</body>
+</html>
