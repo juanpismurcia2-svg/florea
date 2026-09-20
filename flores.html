@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña 🌻🤍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Georgia", serif;
+            background: #fff8dc;
+            color: #4d3500;
+            overflow-x: hidden;
+        }
+
+        /* PANTALLA DE INICIO */
+        #inicio {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #fff7a8, #ffd84d, #e9a900);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease;
+        }
+
+        .inicio-contenido {
+            padding: 30px;
+        }
+
+        .flor-inicio {
+            font-size: 110px;
+            animation: balanceo 2s infinite ease-in-out;
+        }
+
+        .inicio-contenido h1 {
+            font-size: 48px;
+            color: #684700;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+        }
+
+        .inicio-contenido p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            color: #725300;
+        }
+
+        .boton-abrir,
+        .boton-final,
+        .boton-secundario,
+        .boton-juego {
+            border: none;
+            padding: 17px 35px;
+            border-radius: 40px;
+            background: white;
+            color: #a66c00;
+            font-size: 19px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(100,70,0,.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .boton-secundario {
+            background: #ffe36b;
+            color: #5c3f00;
+            margin-top: 25px;
+            font-size: 17px;
+            padding: 14px 28px;
+        }
+
+        .boton-juego {
+            background: #eeb300;
+            color: white;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        .boton-abrir:hover,
+        .boton-final:hover,
+        .boton-secundario:hover,
+        .boton-juego:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(100,70,0,.35);
+        }
+
+        @keyframes balanceo {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-15px); }
+        }
+
+        /* CONTENIDO */
+        #contenido {
+            display: none;
+        }
+
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(233,169,0,0.85), rgba(114,83,0,0.85));
+            color: white;
+        }
+
+        .hero-contenido {
+            max-width: 850px;
+            padding: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            text-shadow: 0 5px 15px rgba(0,0,0,.3);
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin: 20px 0;
+            font-weight: normal;
+        }
+
+        .hero p {
+            font-size: 22px;
+            line-height: 1.7;
+        }
+
+        .fecha {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: rgba(255,255,255,.25);
+            border: 1px solid rgba(255,255,255,.7);
+            backdrop-filter: blur(5px);
+        }
+
+        /* TITULOS */
+        .seccion-titulo {
+            text-align: center;
+            font-size: 40px;
+            color: #bd7c00;
+            margin-bottom: 45px;
+        }
+
+        /* CARTA */
+        .carta-contenedor {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .carta {
+            background: linear-gradient(#fff8d2, #ffeeb0);
+            padding: 55px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(95,65,0,.2);
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        .carta:before, .carta:after {
+            content: "🌻";
+            position: absolute;
+            font-size: 45px;
+        }
+
+        .carta:before { top: 15px; left: 20px; }
+        .carta:after { bottom: 15px; right: 20px; }
+
+        .carta h3 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #8b5b00;
+        }
+
+        .carta p {
+            font-size: 19px;
+            line-height: 1.9;
+            margin-bottom: 17px;
+        }
+
+        .firma {
+            text-align: right;
+            font-size: 25px;
+            margin-top: 30px;
+            color: #a86d00;
+            font-weight: bold;
+        }
+
+        /* MODAL CARTA 2 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(40, 25, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-carta {
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: linear-gradient(#ffffff, #fffde6);
+            padding: 45px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 2px solid #ffd84d;
+            animation: aparecer 0.4s ease-out;
+            position: relative;
+        }
+
+        @keyframes aparecer {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* FOTOS */
+        #fotos {
+            background: #fffdf0;
+        }
+
+        .galeria {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .foto {
+            background: white;
+            padding: 15px 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(80,55,0,.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform: rotate(-1.5deg);
+        }
+
+        .foto:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
+
+        .foto:hover {
+            transform: rotate(0deg) scale(1.04);
+            box-shadow: 0 15px 35px rgba(80,55,0,.25);
+            z-index: 5;
+        }
+
+        .foto img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .foto p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #684700;
+            font-weight: 500;
+        }
+
+        /* MUSICA */
+        #musica {
+            text-align: center;
+            background: linear-gradient(135deg, #ffe985, #fff6bd);
+        }
+
+        .reproductor {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255,255,255,.9);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 12px 30px rgba(110,75,0,.15);
+        }
+
+        .disco {
+            width: 140px;
+            height: 140px;
+            margin: auto auto 25px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffe36b 0 12%, #8f6200 13% 18%, #222 19% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            animation: girar 6s linear infinite;
+            animation-play-state: paused;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .reproductor.reproduciendo .disco {
+            animation-play-state: running;
+        }
+
+        @keyframes girar {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .reproductor h3 {
+            font-size: 28px;
+            color: #805400;
+        }
+
+        .reproductor p {
+            margin: 10px 0 20px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        /* JUEGO DEL AMOR */
+        #juego-seccion {
+            background: #fff9d6;
+            text-align: center;
+        }
+
+        .contenedor-juego {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(110,75,0,.15);
+            border: 2px dashed #ffd84d;
+        }
+
+        .tarjeta-mensaje {
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #725300;
+            padding: 20px;
+            margin: 25px 0;
+            background: #fffdf0;
+            border-radius: 12px;
+            border: 1px solid #ffe985;
+            transition: all 0.3s ease;
+        }
+
+        /* CORAZONES Y PETALOS */
+        .corazon, .petalo {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .corazon {
+            bottom: -40px;
+            font-size: 25px;
+            z-index: 20;
+            animation: subir linear forwards;
+        }
+
+        .petalo {
+            top: -40px;
+            font-size: 25px;
+            z-index: 15;
+            animation: caer linear forwards;
+        }
+
+        @keyframes subir {
+            0% { transform: translateY(0) scale(.5); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-110vh) scale(1.5) rotate(20deg); opacity: 0; }
+        }
+
+        @keyframes caer {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        footer {
+            background: #6b4700;
+            color: #fff6bd;
+            text-align: center;
+            padding: 30px;
+            font-size: 17px;
+        }
+
+        @media(max-width:650px) {
+            .inicio-contenido h1 { font-size: 35px; }
+            .hero h2 { font-size: 24px; }
+            .hero p { font-size: 17px; }
+            .seccion-titulo { font-size: 32px; }
+            .carta { padding: 35px 20px; }
+            .carta p { font-size: 17px; }
+            .modal-carta { padding: 30px 20px; }
+            .galeria { grid-template-columns: 1fr; }
+            .foto img { height: 320px; }
+            .contenedor-juego { padding: 25px 15px; }
+            .tarjeta-mensaje { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PANTALLA INICIAL -->
+<div id="inicio">
+    <div class="inicio-contenido">
+        <div class="flor-inicio">🌻</div>
+        <h1>Amor, tengo algo para ti...</h1>
+        <p>Una pequeña sorpresa para la persona que hace mis días más bonitos. 🤍</p>
+        <button class="boton-abrir" onclick="abrirSorpresa()">💌 Abrir mi sorpresa</button>
+    </div>
+</div>
+
+<!-- CONTENIDO -->
+<div id="contenido">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-contenido">
+            <h1>Para mi niña hermosa 🌻</h1>
+            <h2>21 de Septiembre<br>Día de las Flores Amarillas</h2>
+            <p>Hoy no quiero regalarte solamente flores...<br><br>Quiero regalarte un pedacito de todo lo que siento por ti. 💛</p>
+            <div class="fecha">Shaira, tú haces mis días más bonitos 🤍</div>
+        </div>
+    </section>
+
+    <!-- CARTA PRIMERA -->
+    <section id="carta">
+        <h2 class="seccion-titulo">💌 Una carta para mi niña</h2>
+        <div class="carta-contenedor">
+            <div class="carta">
+                <h3>Mi Shaira, 🌻</h3>
+                <p>Desde que llegaste a mi vida, muchas cosas se sienten diferentes. Los días parecen más bonitos y hasta los pequeños momentos tienen un significado especial.</p>
+                <p>Hoy, en este 21 de septiembre, quería encontrar una forma diferente de decirte lo importante que eres para mí.</p>
+                <p>Estas flores amarillas representan alegría, cariño y todos esos momentos que quiero seguir compartiendo contigo.</p>
+                <p>amor, gracias por cada sonrisa, cada conversación, cada momento y simplemente por ser tú.</p>
+                <p>Me encanta poder compartir momentos contigo y espero que podamos seguir creando muchos recuerdos juntos.</p>
+                <p>No sé qué nos espera mañana, pero sí sé que quiero seguir disfrutando cada momento a tu lado.</p>
+                <p>Espero que cuando veas estas flores recuerdes que hay alguien que piensa en ti, que te quiere muchísimo y que desea verte siempre feliz. 🤍</p>
+                <p>Feliz Día de las Flores Amarillas, mi niña. 🌻🤍</p>
+                
+                <div class="firma">Con todo mi cariño,<br>para ti, amor 🤍</div>
+
+                <!-- BOTÓN PARA SEGUNDA CARTA -->
+                <div style="text-align: center;">
+                    <button class="boton-secundario" onclick="abrirCarta2()">
+                        ✉️ Tienes un segundo mensaje guardado... (Clic aquí)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL SEGUNDA CARTA -->
+    <div id="modal-carta2" class="modal-overlay">
+        <div class="modal-carta">
+            <h3 style="color: #8b5b00; font-size: 28px; margin-bottom: 20px; text-align: center;">
+                Shaira, quería decirte algo más... 🌻✨
+            </h3>
+            
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                mi niña hermosa,
+            </p>
+            
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+                te amo mutoo y quiero decirte que eres , una persona muy especial para mi,
+            </p>
+            
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px;">
+            nunca olvides que siempre te voy a amar y siempre estare para ti.
+            </p>
+
+            <p style="font-size: 18px; line-height: 1.8; margin-bottom: 15px; font-weight: bold; color: #a86d00; text-align: right;">
+               att: De tu amor 🤍
+            </p>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="boton-abrir" style="padding: 10px 30px; font-size: 16px;" onclick="cerrarCarta2()">
+                    Guardar mensaje 💛
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOTOS -->
+    <section id="fotos">
+        <h2 class="seccion-titulo">📸 Nuestros momentos</h2>
+        <div class="galeria">
+            <div class="foto">
+                <img src="./flaca.jpeg" alt="Shaira y yo con flores">
+                <p>Un momento especial juntos 🤍</p>
+            </div>
+            <div class="foto">
+                <img src="./flaca1.jpeg" alt="Sonriendo juntos">
+                <p>Contigo todo es más bonito 🌻</p>
+            </div>
+            <div class="foto">
+                <img src="./mol.jpeg" alt="Nuestra hermosa sonrisa">
+                <p>Una sonrisa que me encanta 🤍</p>
+            </div>
+            <div class="foto">
+                <img src="./peque.jpg" alt="Tu de chiquita">
+                <p>Una sonrisa mala </p>
+            </div>
+            <div class="foto">
+                <img src="./piloto.jpg" alt="mototaxi">
+                <p>Mi piloto favorita</p>
+            </div>
+            <div class="foto">
+                <img src="./obis.jpeg" alt="Los dos santicos">
+                <p>Santa shaira</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUSICA -->
+    <section id="musica">
+        <h2 class="seccion-titulo">🎵 Una canción para Shaira</h2>
+        <div class="reproductor" id="reproductor">
+            <div class="disco">🌻</div>
+            <h3>Nuestra canción ❤️</h3>
+            <p>Una canción para acompañar este pequeño detalle que hice especialmente para ti.</p>
+            <audio id="audio" controls onplay="musicaIniciada()" onpause="musicaPausada()">
+                <source src="./Manuel Medrano - Bajo El Agua (Video Oficial).mp3" type="audio/mpeg">
+                Tu navegador no puede reproducir este audio.
+            </audio>
+        </div>
+    </section>
+
+    <!-- JUEGO INTERACTIVO -->
+    <section id="juego-seccion">
+        <h2 class="seccion-titulo">🎁 Razones por las que eres especial</h2>
+        <div class="contenedor-juego">
+            <p style="font-size: 19px; color: #684700;">Haz clic en el botón para descubrir una razón o un bonito mensaje para ti, Shaira ✨</p>
+            
+            <div class="tarjeta-mensaje" id="mensaje-juego">
+                Haz clic en el botón de abajo 👇🌻
+            </div>
+
+            <button class="boton-juego" onclick="obtenerMensaje()">
+                🌻 Descubrir mensaje 🌻
+            </button>
+        </div>
+    </section>
+<!-- VIDEO PARA SHAIRA -->
+ </section><!-- VIDEO PARA SHAIRA -->
+<section id="video-amor">
+    <h2 class="seccion-titulo">🎬 Un último detalle para ti, Shaira 🌻</h2>
+
+    <div class="video-contenedor">
+        <div class="video-corazon">❤️</div>
+
+        <h3>Preparé algo especialmente para ti...</h3>
+
+        <p>
+            Porque hay cosas que son difíciles de decir con palabras,
+            así que decidí hacerte este pequeño video. 🤍🌻
+        </p>
+
+        <div class="video-marco">
+            <video controls>
+                <source src="./fa.mp4" type="video/mp4">
+                Tu navegador no puede reproducir este video.
+            </video>
+        </div>
+
+   
+        <div class="video-marco">
+            <video controls>
+                <source src="./i love.mp4" type="video/mp4">
+                Tu navegador no puede reproducir este video.
+            </video>
+        </div>
+
+        <p class="mensaje-video">
+            Espero que te guste, mi niña hermosa. 🌻❤️
+            <br>
+            Te amo muchísimo, amor. 🤍
+        </p>
+    </div>
+</section>
+    <footer>
+        Hecho especialmente para mi niña 🌻💛
+        <br><br>
+        21 de Septiembre ❤️
+    </footer>
+</div>
+
+<script>
+    const mensajesAmor = [
+        "🌻 Tu sonrisa tiene la capacidad de arreglar cualquier día malo.",
+        "✨ Cada momento a tu lado se convierte en un recuerdo hermoso.",
+        "❤️ Me encanta la forma en la que te ríes y cómo contagias tu alegría.",
+        "💛 Gracias por ser esa persona tan especial que llena todo de luz.",
+        "🌸 No importa el día, siempre encuentro una razón para pensar en ti.",
+        "🎁 Prometo sacarte más sonrisas de las que puedas contar.",
+        "🌻 Eres mi persona favorita para compartir cualquier momento.",
+        "✨ Todo es mejor y más bonito cuando estás tú presente. ❤️"
+    ];
+
+    function abrirSorpresa() {
+        const inicio = document.getElementById("inicio");
+        const contenido = document.getElementById("contenido");
+        const audio = document.getElementById("audio");
+
+        inicio.style.opacity = "0";
+
+        setTimeout(() => {
+            inicio.style.display = "none";
+            contenido.style.display = "block";
+            lanzarCorazones();
+            lanzarPetalos();
+            audio.play().catch(() => {});
+        }, 1500);
+    }
+
+    function abrirCarta2() {
+        document.getElementById("modal-carta2").style.display = "flex";
+    }
+
+    function cerrarCarta2() {
+        document.getElementById("modal-carta2").style.display = "none";
+    }
+
+    function obtenerMensaje() {
+        const tarjeta = document.getElementById("mensaje-juego");
+        tarjeta.style.opacity = "0";
+        
+        setTimeout(() => {
+            const indice = Math.floor(Math.random() * mensajesAmor.length);
+            tarjeta.innerHTML = mensajesAmor[indice];
+            tarjeta.style.opacity = "1";
+            lanzarLluviaSúper();
+        }, 200);
+    }
+
+    function crearCorazon() {
+        const corazon = document.createElement("div"); 
+        corazon.className = "corazon";
+        const corazones = ["❤️", "💛", "💕", "🤍", "💗"];
+        corazon.innerHTML = corazones[Math.floor(Math.random() * corazones.length)];
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.animationDuration = (Math.random() * 4 + 4) + "s";
+        corazon.style.fontSize = (Math.random() * 20 + 18) + "px";
+        document.body.appendChild(corazon);
+
+        setTimeout(() => { corazon.remove(); }, 8000);
+    }
+
+    function lanzarCorazones() {
+        setInterval(crearCorazon, 1000);
+    }
+
+    function crearPetalo() {
+        const petalo = document.createElement("div");
+        petalo.className = "petalo";
+        petalo.innerHTML = "🌼";
+        petalo.style.left = Math.random() * 100 + "vw";
+        petalo.style.animationDuration = (Math.random() * 5 + 4) + "s";
+        petalo.style.fontSize = (Math.random() * 15 + 15) + "px";
+        document.body.appendChild(petalo);
+
+        setTimeout(() => { petalo.remove(); }, 9000);
+    }
+
+    function lanzarPetalos() {
+        setInterval(crearPetalo, 700);
+    }
+
+    function lanzarLluviaSúper() {
+        for (let i = 0; i < 8; i++) {
+            setTimeout(crearCorazon, i * 100);
+            setTimeout(crearPetalo, i * 120);
+        }
+    }
+
+    function musicaIniciada() {
+        document.getElementById("reproductor").classList.add("reproduciendo");
+    }
+
+    function musicaPausada() {
+        document.getElementById("reproductor").classList.remove("reproduciendo");
+    }
+</script>
+</body>
+</html>
